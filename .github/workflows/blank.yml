@@ -25,6 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # if statement?
+      - name: Try a conditional statement
+        if: ${{github.event_name == 'pull_request'}}
+        run: echo pull request
+          
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
