@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ '**' ]
   pull_request:
     branches: [ '**' ]
 
@@ -25,6 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # if statement?
+      - name: Try a conditional statement
+        if: ${{github.event_name != 'pull_request'}}
+        run: echo pull request
+          
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
@@ -34,3 +40,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+  integration-tests:
+    runs-on: windows-2019
+    needs: ['build']
+    if: ${{github.event_name == 'pull_request'}}
+    steps:
+      - name: run integration tests
+        run: echo workflow dispatch was used
