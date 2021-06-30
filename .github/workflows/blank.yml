@@ -27,7 +27,7 @@ jobs:
 
       # if statement?
       - name: Try a conditional statement
-        if: ${{github.event_name == 'pull_request'}}
+        if: ${{github.event_name != 'pull_request' || github.event_name == '}}
         run: echo pull request
           
 
@@ -40,3 +40,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+  integration-tests:
+    runs-on: windows-2019
+    needs: ['build']
+    if: ${{github.event_name == "pull_request"}}
+    steps:
+      - name: integration tests
+        run: echo integration tests
