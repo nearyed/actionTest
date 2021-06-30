@@ -44,7 +44,7 @@ jobs:
   integration-tests:
     runs-on: windows-2019
     needs: ['build']
-    if: ${{github.event_name == 'workflow_dispatch'}}
+    if: ${{github.event_name == 'pull_request'}}
     steps:
       - name: run integration tests
         run: echo workflow dispatch was used
