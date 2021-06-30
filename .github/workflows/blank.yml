@@ -27,7 +27,7 @@ jobs:
 
       # if statement?
       - name: Try a conditional statement
-        if: ${{github.event_name != 'pull_request' || github.event_name == '}}
+        if: ${{github.event_name != 'pull_request'}}
         run: echo pull request
           
 
